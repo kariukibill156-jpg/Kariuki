@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✈️ Flight 4:20</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+   
+    <style>
+        :root {
+            --primary: #b71c1c;        /* Deep Premium Red */
+            --secondary: #e53935;      /* Vibrant Accent Red */
+            --light-bg: #fcf8f8;       /* Soft White Background */
+            --text-dark: #2d2d2d;      /* Readable Dark Slate */
+            --soft-red: #fbe9e7;       /* Very Soft Red Tint for Cards */
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Poppins', sans-serif; background: var(--light-bg); color: var(--text-dark); overflow-x: hidden; }
+
+        /* --- Navbar --- */
+        header { position: sticky; top:0; z-index:1000; background:white; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 15px rgba(183,28,28,0.05); }
+        .logo { display:flex; align-items:center; font-weight:700; font-size:1.4rem; color: var(--primary); text-decoration:none; gap:10px; }
+        .logo-icon { width: 40px; height: 40px; background: #ffebee; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); color: var(--primary); }
+       
+        nav ul { list-style:none; display:flex; gap:2rem; align-items: center; }
+        nav ul li a { text-decoration:none; color:#555; font-weight:600; transition: 0.3s; font-size: 0.95rem; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+
+        .mobile-menu-branding {
+            display: none; width: 100%; padding: 3rem 1rem 2rem;
+            flex-direction: column; align-items: center;
+            border-bottom: 1px solid #f0f0f0; margin-bottom: 1.5rem;
+        }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1100; }
+        .hamburger span { width: 28px; height: 3px; background: var(--primary); border-radius: 2px; transition: 0.3s; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .mobile-menu-branding { display: flex; }
+            nav ul {
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                background: white; flex-direction: column; justify-content: flex-start;
+                align-items: center; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s ease;
+                padding-top: 2rem;
+            }
+            nav ul.show { right: 0; }
+            nav ul li { margin: 0.8rem 0; }
+        }
+
+        /* --- Hero --- */
+        .hero {
+            display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+            padding:10rem 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.rootsciences.com/wp-content/uploads/2024/12/Facility-Design-Cannabis.jpg.webp');
+            background-size: cover; background-position: center; color:white;
+        }
+        
+        .hero h1 { font-size:clamp(2rem, 5vw, 3.5rem); margin-bottom:1rem; font-weight: 700; }
+        .hero p { font-size:1.1rem; max-width:700px; margin-bottom:2.5rem; line-height: 1.6; }
+       
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn { padding:0.9rem 2.2rem; border-radius:50px; font-weight:600; text-decoration:none; transition: 0.3s; border: 2px solid transparent; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--secondary); transform: translateY(-3px); }
+        .btn-outline { background: rgba(255,255,255,0.1); color: white; border-color: white; backdrop-filter: blur(5px); }
+        .btn-outline:hover { background: white; color: var(--primary); }
+
+        /* --- Refined Stats Bar --- */
+        .stats-bar {
+            background: #ffffff;
+            border-bottom: 1px solid #eee;
+            padding: 5rem 2rem;
+        }
+        
+        .stats-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-radius: 20px;
+            background: var(--soft-red);
+            transition: 0.4s ease;
+        }
+        
+        .stat-item h2 {
+            font-size: 3rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .stat-item p {
+            font-weight: 500;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Shared Sections --- */
+        section { padding: 5rem 2rem; }
+        .section-title { text-align:center; margin-bottom:3rem; color: var(--primary); font-size: 2rem; }
+        .container { max-width: 1100px; margin: auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+       
+        /* --- Carousel --- */
+        .carousel-container { padding: 4rem 1rem; background: #fff; }
+        .swiper { width: 100%; height: 500px; border-radius: 25px; }
+        .swiper-slide { position: relative; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 3rem 2rem; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: white; }
+
+        /* --- Full Restored Footer --- */
+        footer { background: var(--primary); color:white; padding:4rem 2rem 2rem; }
+        .footer-container { max-width:1100px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:3rem; }
+        .footer-container h4 { margin-bottom: 1.5rem; font-size: 1.1rem; color: white; }
+        .footer-link { color:#ffebee; text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom: 12px; transition: 0.3s; font-size: 0.9rem; }
+        .footer-link a { color: inherit; text-decoration: none; }
+        .footer-link:hover { color: white; padding-left: 5px; }
+        
+        .social-icons { display: flex; gap: 12px; margin-top: 20px; }
+        .social-circle { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: 0.3s; text-decoration: none; }
+        .social-circle:hover { background: var(--secondary); transform: translateY(-3px); }
+        .social-circle svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* Global layout fix for navigation chevron and layout headers */
+        header svg, .footer-link svg {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* --- Floating Icon-Only WhatsApp Style --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            z-index: 1001;
+            transition: 0.3s ease;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(8deg);
+            background: #20ba5a;
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <div class="logo-icon"><i data-lucide="plane"></i></div>
+    <span>✈️ FLIGHT <span style="color:var(--secondary);">4:20</span></span>
+  </a>
+
+  <nav>
+    <ul id="nav-links">
+      <li class="mobile-menu-branding">
+        <div class="logo" style="flex-direction: column; gap: 10px;">
+            <div class="logo-icon" style="width: 55px; height: 55px;"><i data-lucide="plane"></i></div>
+            <span>✈️ FLIGHT <span style="color:var(--secondary);">4:20</span></span>
+        </div>
+      </li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Welcome to ✈️ Flight 4:20</h1>
+  <p>Home of cost effective & highly profitable productivity, modern and practical cultivation tracks. Our aim is to empower communities through sustainable production, environmental care, and comprehensive green growth initiatives.</p>
+  <div class="hero-btns">
+    <a href="services.html" class="btn btn-primary">Our Programs</a>
+    <a href="#who-we-are" class="btn btn-outline">Learn More</a>
+  </div>
+</section>
+
+<section class="stats-bar">
+    <div class="stats-container">
+        <div class="stat-item">
+            <h2 class="counter" data-target="50000" data-suffix="k+">0</h2>
+            <p>Plants Monitored</p>
+        </div>
+        <div class="stat-item">
+            <h2 class="counter" data-target="1200" data-suffix="k">0</h2>
+            <p>Growers Trained</p>
+        </div>
+        <div class="stat-item">
+            <h2 class="counter" data-target="15" data-suffix="">0</h2>
+            <p>Facilities Reached</p>
+        </div>
+    </div>
+</section>
+
+<section class="container" id="who-we-are">
+    <div class="grid-3" style="align-items: center;">
+        <div>
+            <img src="https://img.freepik.com/premium-photo/macro-marijuana-leaves-hemp-plant-black-background_362520-2303.jpg" alt="Marijuana Close Up Leaf" style="width:100%; height: 380px; object-fit: cover; border-radius:25px; box-shadow: 20px 20px 0px var(--secondary);">
+        </div>
+        <div style="grid-column: span 2;">
+            <h2 style="color:var(--primary); margin-bottom:1.5rem; font-size: 2.2rem;">Who We Are</h2>
+            <p style="line-height:1.8; color:#555; margin-bottom:1.5rem;">
+                Founded on the principles of precision horticulture and community empowerment, ✈️ Flight 4:20 operates at the cutting edge of greenhouse infrastructure and organic management. We implement optimized technical solutions to ensure maximum harvest potential while ensuring complete compliance and modern development standards.
+            </p>
+            <a href="about.html" style="color:var(--primary); font-weight:700; text-decoration:none; display: flex; align-items: center; gap: 8px;">Read Our Full Story <i data-lucide="arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<section class="carousel-container">
+    <h2 class="section-title">Visualizing Our Operations</h2>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="https://www.growspan.com/wp-content/uploads/2016/07/CS-World-of-Weed020-1024x683.jpg" alt="Greenhouse Greenhouse Facilities">
+            <div class="slide-content"><h3>Greenhouse Environments</h3><p>Controlled operations setup</p></div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://www.rootsciences.com/wp-content/uploads/2024/12/Facility-Design-Cannabis.jpg.webp" alt="Indoor Commercial Line Setup">
+            <div class="slide-content"><h3>Indoor Cultivation</h3><p>High-yield extraction layout</p></div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <div class="logo" style="color:white; margin-bottom:1.5rem;">
+        <div class="logo-icon" style="background:rgba(255,255,255,0.1); border-color:white; color:white;"><i data-lucide="plane"></i></div>
+        <span>✈️ FLIGHT 4:20</span>
+      </div>
+      <p style="font-size:0.9rem; opacity:0.8; line-height: 1.6;">Home of cost effective & highly profitable productivity, modern and practical extraction frameworks.</p>
+      <div class="social-icons">
+        <!-- Direct High-Reliability Inline SVG Icons for Twitter, Instagram, GitHub -->
+        <a href="#" class="social-circle" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" class="social-circle" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="#" class="social-circle" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <div class="footer-link"><i data-lucide="chevron-right"></i> <a href="about.html">About Flight 4:20</a></div>
+      <div class="footer-link"><i data-lucide="chevron-right"></i> <a href="services.html">Our Services</a></div>
+      <div class="footer-link"><i data-lucide="chevron-right"></i> <a href="gallery.html">Project Gallery</a></div>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <div class="footer-link"><i data-lucide="mail"></i> daudigreens@gmail.com</div>
+      <div class="footer-link"><i data-lucide="phone"></i> +254 726522870</div>
+      <div class="footer-link"><i data-lucide="map-pin"></i> Nairobi, Kenya</div>
+    </div>
+  </div>
+  <div style="text-align:center; padding-top:3rem; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.1); margin-top:3rem; opacity: 0.6;">
+    &copy; 2026 ✈️ Flight 4:20. All rights reserved.
+  </div>
+</footer>
+
+<!-- Floating Icon-Only WhatsApp Badge (No text layout) -->
+<a href="https://wa.me/254726522870?text=Hello%20Flight%204%3A20%21%20I%20visited%20your%20website%20and%20would%20like%20to%20learn%20more." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-3.559c1.649.979 3.26 1.492 4.823 1.493 5.432 0 9.865-4.437 9.868-9.873.002-2.633-1.019-5.107-2.876-6.966C16.59 3.236 14.116 2.213 11.481 2.213c-5.437 0-9.873 4.434-9.877 9.874a9.747 9.747 0 001.398 4.933l-.995 3.641 3.741-.981.099.06zM17.15 14.89c-.279-.14-1.647-.812-1.902-.905-.255-.094-.442-.14-.627.14-.185.279-.714.905-.875 1.09-.162.186-.323.21-.602.07-.279-.14-1.18-.435-2.247-1.388-.83-.74-1.39-1.653-1.553-1.933-.163-.28-.018-.431.122-.571.125-.126.279-.325.418-.489.14-.162.186-.279.279-.465.093-.186.046-.349-.023-.489-.069-.14-.627-1.51-.859-2.068-.226-.544-.453-.471-.627-.48l-.534-.01c-.185 0-.486.07-.74.349-.256.279-.977.954-.977 2.326s.999 2.693 1.139 2.879c.14.186 1.966 3.003 4.763 4.201.666.285 1.186.455 1.59.583.67.213 1.28.183 1.762.112.537-.08 1.647-.674 1.88-1.323.232-.649.232-1.206.162-1.323-.069-.117-.255-.186-.534-.326z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    lucide.createIcons();
+
+    // Hamburger Logic
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+        const spans = hamburger.querySelectorAll('span');
+        if(navLinks.classList.contains('show')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+        } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        }
+    });
+
+    // Count-up Animation Logic
+    const counters = document.querySelectorAll('.counter');
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const suffix = counter.getAttribute('data-suffix');
+           
+            const duration = 2000;
+            const startTime = performance.now();
+
+            const updateCount = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+               
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const currentVal = Math.floor(easeOut * target);
+
+                if (target === 50000) {
+                    counter.innerText = Math.floor(currentVal / 1000) + suffix;
+                } else if (target === 1200) {
+                    counter.innerText = (currentVal / 1000).toFixed(1) + suffix;
+                } else {
+                    counter.innerText = currentVal + suffix;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    if (target === 50000) counter.innerText = "50" + suffix;
+                    else if (target === 1200) counter.innerText = "1.2" + suffix;
+                    else counter.innerText = target + suffix;
+                }
+            };
+            requestAnimationFrame(updateCount);
+        });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('.stats-bar'));
+
+    // Swiper Carousel Initialization
+    const swiper = new Swiper(".mySwiper", {
+      loop: true,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      autoplay: { delay: 4000, disableOnInteraction: false }
+    });
+</script>
+</body>
+</html>
